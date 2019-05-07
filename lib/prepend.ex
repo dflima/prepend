@@ -28,5 +28,6 @@ defmodule Prepend do
   """
   @spec stream_lines(Enumerable.t(), String.t()) :: Enumerable.t()
   def stream_lines(in_stream, string) do
-    in_stream |> Stream.map(&(string <> &1)) end
+    in_stream |> Stream.map(&(string <> &1))
+  end
 end

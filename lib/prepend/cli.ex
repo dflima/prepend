@@ -8,8 +8,9 @@ defmodule Prepend.CLI do
   def main(args \\ []) do
     stdio = IO.stream(:stdio, :line)
 
-    stdio |> Prepend.stream_lines(Enum.join(args, " "))
+    stdio
+    |> Prepend.stream_lines(Enum.join(args, " "))
     |> Stream.into(stdio)
-            |> Stream.run
+    |> Stream.run()
   end
 end
