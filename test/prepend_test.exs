@@ -31,9 +31,7 @@ defmodule PrependTest do
 
   @tag timeout: 300_000
   property "streams" do
-    check all lines <- list_of(string(:printable)),
-              prefix <- string(:printable),
-              max_runs: 1000 do
+    check all(lines <- list_of(string(:printable)), prefix <- string(:printable), max_runs: 1000) do
       lines |> Prepend.stream_lines(prefix) |> Stream.each(&String.starts_with?(&1, prefix))
     end
   end
