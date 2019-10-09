@@ -2,17 +2,12 @@ name: Workflow to run unit tests
 on: push
 jobs:
   test:
-    name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-    strategy:
-      matrix:
-        otp: [20.3.8, 21.3.8, 22.0.7, 22.1.2]
-        elixir: [1.6.6, 1.7.4, 1.8.2, 1.9.1]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1.0.0
       - uses: actions/setup-elixir@v1.0.0
         with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
+          otp-version: 22.0.7
+          elixir-version: 1.9.1
       - run: mix deps.get
       - run: mix test
