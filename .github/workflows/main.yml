@@ -1,0 +1,13 @@
+name: Workflow to run unit tests
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: actions/setup-elixir@v1.0.0
+        with:
+          otp-version: 22.0.7
+          elixir-version: 1.9.1
+      - run: mix deps.get
+      - run: mix test
