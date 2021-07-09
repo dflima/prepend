@@ -1,20 +1,21 @@
 workflow "Tests & Formatting" {
-  on = "push"
-  resolves = ["Tests", "Check Formatting"]
+    on = "push"
+    resolves = ["Test", "Check Formatting"]
 }
 
+# Convenience workflow for `mix deps.get`
 action "Get Deps" {
-  uses = "dflima/mix-actions@v1.0"
-  args = "deps.get"
+    uses = "jclem/action-mix/deps.get@v1.3.3"
 }
 
-action "Tests" {
-  uses = "dflima/mix-actions@v1.0"
-  needs = "Get Deps"
-  args = "test"
+# Convenience workflow for `mix test`
+action "Test" {
+    uses = "jclem/action-mix/test@v1.3.3"
+    needs = "Get Deps"
 }
 
 action "Check Formatting" {
-  uses = "dflima/mix-actions/format@v1.0"
-  needs = "Get Deps"
+    uses = "jclem/action-mix@v1.3.3"
+    needs = "Get Deps"
+    args = "format --check-formatted"
 }
